@@ -1,0 +1,27 @@
+<header>
+	<nav class="round">
+		<ul>
+			<% if user_signed_in? %>
+			<li>
+				<%= "You're signed in as #{current_user.fullname} <#{current_user.email}>" %>
+			</li>
+			<% else %>
+			<li>
+				<%= "Test your OpenID by signing in!"%>
+			</li>
+			<% end %>
+			<li>
+				<%= link_to "Home", root_path %>
+			</li>
+			<% if user_signed_in? %>
+			<li>
+				<%= link_to "Sign out", destroy_user_session_path %>
+			</li>
+			<% else %>
+			<li>
+				<%= link_to "Sign in", new_user_session_path %>
+			</li>
+			<% end %>
+		</ul>
+	</nav>
+</header>

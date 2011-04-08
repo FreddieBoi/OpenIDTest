@@ -1,13 +1,11 @@
 <h2>Sign in</h2>
 <%= form_for resource, :as => resource_name, :url => session_path(resource_name) do |f| %>
-<p>
+<div class="field">
 	<%= f.label :identity_url %>
-</p>
-<p>
+	<br />
 	<%= f.text_field :identity_url %>
-</p>
-
-<p>
+</div>
+<div class="actions">
 	<%= f.submit "Sign in" %>
-</p>
+</div>
 <% end %>

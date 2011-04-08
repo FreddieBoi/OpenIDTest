@@ -13,10 +13,12 @@
 ActiveRecord::Schema.define(:version => 20110408140226) do
 
   create_table "users", :force => true do |t|
-    t.string "identity_url"
-    t.string "name"
-    t.string "email"
-    t.string "gender"
+    t.string   "identity_url"
+    t.string   "fullname"
+    t.string   "email"
+    t.string   "gender"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["identity_url"], :name => "index_users_on_identity_url", :unique => true
