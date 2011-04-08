@@ -5,35 +5,25 @@ class User < ActiveRecord::Base
 
 	# Setup accessible (or protected) attributes for your model
 	attr_accessible :identity_url
-	def self.build_from_identity_url(identity_url)
+	def self.create_from_identity_url(identity_url)
 		User.new(:identity_url => identity_url)
 	end
 
 	def self.openid_required_fields
-		["fullname", "email", "http://axschema.org/namePerson", "http://axschema.org/contact/email"]
-	end
-
-	def self.openid_optional_fields
-		["gender", "http://axschema.org/person/gender"]
+		["http://axschema.org/contact/email", "http://axschema.org/namePerson/first", "http://axschema.org/namePerson/last"]
 	end
 
 	def openid_fields=(fields)
 		fields.each do |key, value|
-		# Some AX providers can return multiple values per key
-			if value.is_a? Array
-			value = value.first
-			end
-
 			case key.to_s
-			when "fullname", "http://axschema.org/namePerson"
-				self.name = value
-			when "email", "http://axschema.org/contact/email"
-				self.email = value
-			when "gender", "http://axschema.org/person/gender"
-				self.gender = value
-			else
-			logger.error "Unknown OpenID field: #{key}"
+			when "http://axschema.org/contact/email"
+				self.email = value.to_s
+			when "http://axschema.org/namePerson/first"
+				self.first_name = value.to_s
+			when "http://axschema.org/namePerson/last"
+				self.last_name = value.to_s
 			end
 		end
+		self.save!
 	end
 end

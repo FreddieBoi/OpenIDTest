@@ -8,6 +8,7 @@ gem 'rails', '3.0.6'
 gem 'sqlite3'
 gem 'devise'
 gem 'devise_openid_authenticatable'
+gem 'ruby-openid-apps-discovery'
 
 # Use unicorn as the web server
 # gem 'unicorn'
